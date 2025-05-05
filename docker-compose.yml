@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  storyboard-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./backend/models:/app/backend/models
+    environment:
+      - PYTHONPATH=/app
+      - MODEL_PATH=/app/backend/models
+    restart: unless-stopped 

@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Local development
+.DS_Store
+*.db
+*.sqlite3
+
+# Model files (large files)
+backend/models/*
+!backend/models/.gitkeep
+
+# Frontend (not needed in container)
+frontend/
+
+# Test files
+client_test.py
+text.md
+
+v2/frontend/frontend
+v2/backend/models
+v2/logs

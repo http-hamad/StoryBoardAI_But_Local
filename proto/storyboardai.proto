@@ -1,0 +1,47 @@
+syntax = "proto3";
+package storyboardai;
+
+// --- Story (text) ---
+service StoryService {
+  rpc GenerateStory (TextRequest) returns (TextResponse);
+}
+message TextRequest {
+  string prompt = 1;
+  string theme  = 2;
+}
+message TextResponse {
+  string story = 1;
+}
+
+// --- Images ---
+service ImageService {
+  rpc GenerateImages (ImageRequest) returns (ImageResponse);
+}
+message ImageRequest {
+  string story     = 1;
+  int32  num_images = 2;
+}
+message ImageResponse {
+  repeated bytes images = 1; // each PNG‐encoded
+}
+
+// --- Voice ---
+service VoiceService {
+  rpc GenerateVoice (TextRequest) returns (AudioResponse);
+}
+message AudioResponse {
+  bytes audio = 1; // WAV bytes
+}
+
+// --- Video ---
+service VideoService {
+  rpc GenerateVideo (VideoRequest) returns (VideoResponse);
+}
+message VideoRequest {
+  repeated bytes images     = 1;
+  bytes         voiceover   = 2;
+  string        music_track = 3;
+}
+message VideoResponse {
+  bytes video = 1; // MP4 bytes
+}
