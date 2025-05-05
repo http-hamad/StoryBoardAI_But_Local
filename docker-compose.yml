@@ -9,7 +9,10 @@ services:
       - "50051:50051"
     volumes:
       - ./backend/models:/app/backend/models
+      - ~/.cache/huggingface:/root/.cache/huggingface
     environment:
       - PYTHONPATH=/app
       - MODEL_PATH=/app/backend/models
+      - TRANSFORMERS_CACHE=/root/.cache/huggingface/transformers
+      - HF_DATASETS_CACHE=/root/.cache/huggingface/datasets
     restart: unless-stopped 

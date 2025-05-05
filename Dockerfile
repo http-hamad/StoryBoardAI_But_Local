@@ -22,12 +22,22 @@ RUN pip install --upgrade pip && \
 COPY proto/ proto/
 COPY server/ server/
 
-# Create models directory (models will be mounted)
-RUN mkdir -p /app/backend/models/voice_model/music
+# Create all necessary model directories and cache directory
+RUN mkdir -p /app/backend/models/text_model/txt_models/meta-llama/Llama-3.2-1B && \
+    mkdir -p /app/backend/models/text_model/txt_tokenizers/meta-llama/Llama-3.2-1B && \
+    mkdir -p /app/backend/models/image_model/amused_model && \
+    mkdir -p /app/backend/models/voice_model/tts_models/speecht5_tts && \
+    mkdir -p /app/backend/models/voice_model/tts_processors/speecht5_tts && \
+    mkdir -p /app/backend/models/voice_model/tts_vocoders/speecht5_hifigan && \
+    mkdir -p /app/backend/models/voice_model/music && \
+    mkdir -p /root/.cache/huggingface && \
+    chmod -R 777 /root/.cache/huggingface
 
 # Set environment variables
 ENV PYTHONPATH=/app
 ENV MODEL_PATH=/app/backend/models
+ENV TRANSFORMERS_CACHE=/root/.cache/huggingface/transformers
+ENV HF_DATASETS_CACHE=/root/.cache/huggingface/datasets
 
 # Expose gRPC port
 EXPOSE 50051
